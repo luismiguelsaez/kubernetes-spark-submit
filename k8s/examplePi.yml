@@ -43,6 +43,6 @@ spec:
                 "--class", "org.apache.spark.examples.SparkPi",
                 "--conf", "spark.kubernetes.namespace=default",
                 "--conf", "spark.kubernetes.authenticate.driver.serviceAccountName=spark",
-                "--conf", "spark.executor.instances=1",
+                "--conf", "spark.executor.instances=2",
                 "--conf", "spark.kubernetes.container.image=gcr.io/spark-operator/spark:v2.4.5",
                 "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5.jar" ]
