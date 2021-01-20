@@ -16,17 +16,17 @@ Steps
 
 ### Apply manifest
 ```
-kubernetes apply -f k8s/examplePi.yml
+kubectl apply -f k8s/examplePi.yml
 ```
 
 ### Check running containers
 ```
-kubernetes get pods
+kubectl get pods
 ```
 
 ### Check driver pod logs
 ```
-kubernetes logs -f pods/spark-pi-1611178703250-driver
+kubectl logs -f pods/spark-pi-1611178703250-driver
 ```
 ```
 21/01/20 21:38:33 INFO TaskSchedulerImpl: Adding task set 0.0 with 2 tasks
@@ -54,3 +54,7 @@ Pi is roughly 3.14159570797854
 21/01/20 21:38:33 INFO ShutdownHookManager: Deleting directory /var/data/spark-1b835987-5b66-4cff-8750-2c78de9d89bf/spark-5926d990-c9a1-47f5-932c-917671f18fde
 ```
 
+### Clean
+```
+kubectl delete -f k8s/examplePi.yml
+````
