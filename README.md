@@ -31,7 +31,7 @@ kubectl get pods
 
 ### Check driver pod logs
 ```
-kubectl logs -f pods/spark-pi-1611178703250-driver
+kubectl logs -l spark-role=driver
 ```
 ```
 21/01/20 21:38:33 INFO TaskSchedulerImpl: Adding task set 0.0 with 2 tasks

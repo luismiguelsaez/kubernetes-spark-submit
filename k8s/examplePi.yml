@@ -1,37 +1,17 @@
 ---
 
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: spark
-  namespace: default
-
----
-
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: spark
-  namespace: default
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-- kind: ServiceAccount
-  name: spark
-  namespace: default
-
----
-
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: submit
   namespace: default
+  labels:
+    app.kubernetes.io/name: submit
+    spark-role: launcher
 spec:
   template:
     spec:
+      serviceAccountName: spark
       restartPolicy: Never
       containers:
       - name: test
@@ -50,13 +30,13 @@ spec:
                 "--conf", "spark.kubernetes.driver.label.spark-commit-role=driver",
                 "--conf", "spark.kubernetes.executor.label.spark-commit-role=executor",
                 # Driver resource allocation
-                "--conf", "spark.kubernetes.driver.request.cores=0.1",
-                "--conf", "spark.kubernetes.driver.limit.cores=0.5",
+                "--conf", "spark.kubernetes.driver.request.cores=1",
+                "--conf", "spark.kubernetes.driver.limit.cores=1",
                 "--conf", "spark.kubernetes.driver.request.memory=256m",
                 "--conf", "spark.kubernetes.driver.limit.memory=256m",
                 # Executor resource allocation
                 "--conf", "spark.kubernetes.executor.request.cores=1",
-                "--conf", "spark.kubernetes.executor.limit.cores=1.5",
+                "--conf", "spark.kubernetes.executor.limit.cores=1",
                 "--conf", "spark.kubernetes.executor.request.memory=256m",
                 "--conf", "spark.kubernetes.executor.limit.memory=1g",
                 # Driver/executor shared volume
