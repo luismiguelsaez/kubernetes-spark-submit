@@ -44,9 +44,30 @@ spec:
                 "--conf", "spark.executor.instances=2",
                 "--conf", "spark.kubernetes.namespace=default",
                 "--conf", "spark.kubernetes.authenticate.driver.serviceAccountName=spark",
-                "--conf", "spark.kubernetes.node.selector.*",
+                #"--conf", "spark.kubernetes.node.selector.*",
                 "--conf", "spark.kubernetes.container.image=gcr.io/spark-operator/spark:v2.4.5",
-                #"--conf", "spark.kubernetes.executor.volumes.persistentVolumeClaim.checkpointpvc.options.claimName=spark-pvc-claim",
-                #"--conf", "spark.kubernetes.executor.volumes.persistentVolumeClaim.checkpointpvc.mount.path=/checkpoint.",
+                # Pods labeling
+                "--conf", "spark.kubernetes.driver.label.spark-commit-role=driver",
+                "--conf", "spark.kubernetes.executor.label.spark-commit-role=executor",
+                # Driver resource allocation
+                "--conf", "spark.kubernetes.driver.request.cores=0.1",
+                "--conf", "spark.kubernetes.driver.limit.cores=0.5",
+                "--conf", "spark.kubernetes.driver.request.memory=256m",
+                "--conf", "spark.kubernetes.driver.limit.memory=256m",
+                # Executor resource allocation
+                "--conf", "spark.kubernetes.executor.request.cores=1",
+                "--conf", "spark.kubernetes.executor.limit.cores=1.5",
+                "--conf", "spark.kubernetes.executor.request.memory=256m",
+                "--conf", "spark.kubernetes.executor.limit.memory=1g",
+                # Driver/executor shared volume
                 "--conf", "spark.kubernetes.volumes.emptyDir.spark-shared.mount.path=/tmp",
+                # Delete executor pods on termination
+                "--conf", "spark.kubernetes.executor.deleteOnTermination=true",
+                # Path for side upload in cluster mode
+                "--conf", "spark.kubernetes.file.upload.path=/tmp/sideupload",
+                # Extra options
+                "--conf", "spark.driver.extraJavaOptions=-Divy.cache.dir=/tmp -Divy.home=/tmp",
+                # Extra packages to upload to executors
+                #"--packages", "com.amazonaws:aws-java-sdk:1.7.4,org.apache.hadoop:hadoop-aws:2.7.6",
+                # Application package to launch
                 "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5.jar" ]
