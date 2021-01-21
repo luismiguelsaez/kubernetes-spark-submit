@@ -41,8 +41,12 @@ spec:
                 "--deploy-mode", "cluster",
                 "--name", "spark-pi",
                 "--class", "org.apache.spark.examples.SparkPi",
+                "--conf", "spark.executor.instances=2",
                 "--conf", "spark.kubernetes.namespace=default",
                 "--conf", "spark.kubernetes.authenticate.driver.serviceAccountName=spark",
-                "--conf", "spark.executor.instances=2",
+                "--conf", "spark.kubernetes.node.selector.*",
                 "--conf", "spark.kubernetes.container.image=gcr.io/spark-operator/spark:v2.4.5",
+                #"--conf", "spark.kubernetes.executor.volumes.persistentVolumeClaim.checkpointpvc.options.claimName=spark-pvc-claim",
+                #"--conf", "spark.kubernetes.executor.volumes.persistentVolumeClaim.checkpointpvc.mount.path=/checkpoint.",
+                "--conf", "spark.kubernetes.volumes.emptyDir.spark-shared.mount.path=/tmp",
                 "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5.jar" ]

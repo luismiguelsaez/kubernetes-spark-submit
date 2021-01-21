@@ -10,6 +10,10 @@ Requirements
 ------------
 
 - Running Kubernetes cluster ( minikube, docker-desktop, etc. )
+Example:
+    ```
+    minikube start --cpus=4 --memory=6g --driver=hyperkit --nodes=2
+    ```
 
 Steps
 -----
