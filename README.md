@@ -12,7 +12,7 @@ Requirements
 - Running Kubernetes cluster ( minikube, docker-desktop, etc. )
 Example:
     ```
-    minikube start --cpus=2 --memory=3g --driver=hyperkit --nodes=2 --disk-size=4g∫
+    minikube start --cpus=2 --memory=3g --driver=hyperkit --nodes=2 --disk-size=4g
     minikube addons enable ingress
     ```
 
