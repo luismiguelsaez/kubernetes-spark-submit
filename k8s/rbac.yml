@@ -22,8 +22,14 @@ metadata:
   name: spark-submit-pod-creator
 rules:
   - apiGroups: [""]
-    resources: ["pods","services","configmaps"]
+    resources: ["pods"]
     verbs: ["create", "get", "watch", "list", "delete"]
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["create", "get", "delete"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["create", "get", "delete"]
 
 ---
 

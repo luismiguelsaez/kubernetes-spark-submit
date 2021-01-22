@@ -20,7 +20,6 @@ spec:
         args: [ "--master", "k8s://https://kubernetes.default", 
                 "--deploy-mode", "cluster",
                 "--name", "spark-pi",
-                "--class", "org.apache.spark.examples.SparkPi",
                 "--conf", "spark.executor.instances=2",
                 # Kubrnetes authorization config
                 "--conf", "spark.kubernetes.namespace=spark-submit",
@@ -50,5 +49,7 @@ spec:
                 "--conf", "spark.driver.extraJavaOptions=-Divy.cache.dir=/tmp -Divy.home=/tmp",
                 # Extra packages to upload to executors
                 #"--packages", "com.amazonaws:aws-java-sdk:1.7.4,org.apache.hadoop:hadoop-aws:2.7.6",
+                # Package class to launch
+                "--class", "org.apache.spark.examples.SparkPi",
                 # Application package to launch
                 "local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5.jar" ]
