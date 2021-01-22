@@ -21,7 +21,7 @@ Steps
 
 ### Apply manifest
 ```
-kubectl apply -f k8s/examplePi.yml
+kubectl apply -f k8s
 ```
 
 ### Check running containers
@@ -61,5 +61,5 @@ Pi is roughly 3.14159570797854
 
 ### Clean
 ```
-kubectl delete -f k8s/examplePi.yml
+kubectl delete -f k8s
 ````
