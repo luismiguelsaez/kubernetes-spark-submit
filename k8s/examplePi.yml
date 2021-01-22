@@ -51,6 +51,8 @@ spec:
                 #"--packages", "com.amazonaws:aws-java-sdk:1.7.4,org.apache.hadoop:hadoop-aws:2.7.6",
                 # Extra classpath packages for driver
                 #"--conf", "spark.driver.extraClassPath=/opt/spark/jars/hadoop-client-2.7.3.jar:/opt/spark/jars/hadoop-common-2.7.3.jar",
+                # Additional dependencies
+                "--jars", "/opt/spark/jars/hadoop-client-2.7.3.jar,/opt/spark/jars/hadoop-common-2.7.3.jar",
                 # Package class to launch
                 "--class", "org.apache.spark.examples.SparkPi",
                 # Application package to launch
