@@ -19,9 +19,17 @@ Example:
 Steps
 -----
 
+### Build Spark custom image
+```
+docker build -t luismiguelsaez/spark-operator:custom-v2.4.5 .
+docker login -u luismiguelsaez
+docker push luismiguelsaez/spark-operator:custom-v2.4.5
+```
+
 ### Apply manifest
 ```
-kubectl apply -f k8s
+kubectl apply -f k8s/rbac.yml
+kubectl apply -f k8s/examplePi.yml
 ```
 
 ### Check running containers

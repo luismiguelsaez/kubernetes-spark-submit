@@ -25,7 +25,7 @@ spec:
                 "--conf", "spark.kubernetes.namespace=spark-submit",
                 "--conf", "spark.kubernetes.authenticate.driver.serviceAccountName=spark-submit",
                 #"--conf", "spark.kubernetes.node.selector.*",
-                "--conf", "spark.kubernetes.container.image=gcr.io/spark-operator/spark:v2.4.5",
+                "--conf", "spark.kubernetes.container.image=luismiguelsaez/spark-operator:custom-v2.4.5",
                 # Pods labeling
                 "--conf", "spark.kubernetes.driver.label.spark-commit-role=driver",
                 "--conf", "spark.kubernetes.executor.label.spark-commit-role=executor",
@@ -42,7 +42,7 @@ spec:
                 # Driver/executor shared volume
                 "--conf", "spark.kubernetes.volumes.emptyDir.spark-shared.mount.path=/tmp",
                 # Delete executor pods on termination
-                "--conf", "spark.kubernetes.executor.deleteOnTermination=true",
+                "--conf", "spark.kubernetes.executor.deleteOnTermination=false",
                 # Path for side upload in cluster mode
                 "--conf", "spark.kubernetes.file.upload.path=/tmp/sideupload",
                 # Extra options
@@ -50,9 +50,9 @@ spec:
                 # Extra packages to upload to executors
                 #"--packages", "com.amazonaws:aws-java-sdk:1.7.4,org.apache.hadoop:hadoop-aws:2.7.6",
                 # Extra classpath packages for driver
-                #"--conf", "spark.driver.extraClassPath=/opt/spark/jars/hadoop-client-2.7.3.jar:/opt/spark/jars/hadoop-common-2.7.3.jar",
+                #"--conf", "spark.executor.extraClassPath=/opt/spark/jars/hadoop-client-2.7.3.jar:/opt/spark/jars/hadoop-common-3.3.0.jar",
                 # Additional dependencies
-                "--jars", "/opt/spark/jars/hadoop-client-2.7.3.jar,/opt/spark/jars/hadoop-common-2.7.3.jar",
+                "--jars", "/opt/spark/jars/hadoop-client-2.7.3.jar,/opt/spark/jars/hadoop-common-3.3.0.jar",
                 # Package class to launch
                 "--class", "org.apache.spark.examples.SparkPi",
                 # Application package to launch
